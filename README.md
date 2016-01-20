@@ -1,2 +1,3 @@
 # code-samples
-My solutions Interesting problems as a showcase.
+
+ Showcasing my solutions to some interesting problems.
