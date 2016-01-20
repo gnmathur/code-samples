@@ -23,6 +23,7 @@
 # SOFTWARE.
 
 import sys
+import math
 
 """
 Boogle solver class
