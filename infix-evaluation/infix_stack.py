@@ -167,8 +167,8 @@ class InfixEvaluator:
         return tokens
 
     @staticmethod
-    def compute(operand1, operand2, operator):
-        return InfixEvaluator.v_operations[operator](float(operand1), float(operand2))
+    def compute(operand2, operand1, operator):
+        return InfixEvaluator.v_operations[operator](float(operand2), float(operand1))
 
     @staticmethod
     def precedence(operator1, operator2):
@@ -179,7 +179,7 @@ class InfixEvaluator:
             if operator is not self.v_open_paren:
                 operand1 = self.operands.pop()
                 operand2 = self.operands.pop()
-                result = InfixEvaluator.compute(operand1, operand2, operator)
+                result = InfixEvaluator.compute(operand2, operand1, operator)
                 self.operands.push(result)
    
     # Evaluate the artimetic expression
@@ -192,9 +192,11 @@ class InfixEvaluator:
                 if top_operator is not None and \
                     top_operator is not self.v_open_paren and \
                     True == self.precedence(top_operator, t):
-                    result = InfixEvaluator.compute(self.operands.pop(), \
-                            self.operands.pop(), self.operators.pop())
-                    self.operands.push(result)
+                        operand1 = self.operands.pop()
+                        operand2 = self.operands.pop()
+                        result = InfixEvaluator.compute(operand2, operand1, \
+                                self.operators.pop())
+                        self.operands.push(result)
                 self.operators.push(t)
             elif InfixEvaluator.is_paren(t):
                 if t == self.v_open_paren:
@@ -211,7 +213,7 @@ class InfixEvaluator:
             print "Invalid infix expression"
             return 
 
-        print "Result:", self.evaluate(tokens)
+        return self.evaluate(tokens)
 
 def usage():
     print "Usage: infix.py \"<expression with operators and operands seperated by space>\""
@@ -224,5 +226,5 @@ if __name__ == "__main__":
         exit(-1)
 
     E = InfixEvaluator()
-    E(sys.argv[1])
+    print E(sys.argv[1])
     
