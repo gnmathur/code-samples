@@ -85,8 +85,8 @@ class Stack:
     def popall(self):
         while len(self.sl) > 0:
             obj = self.sl.pop()
+            self.count = self.count - 1 
             yield obj
-        self.count = 0
 
     def __str__(self):
         mstr = ""
@@ -100,8 +100,8 @@ class Stack:
 class InfixEvaluator:
     # Operator precedence
     opprec = {
-            '*':450, 
-            '/':430, 
+            '/':450, 
+            '*':430, 
             '+':350, 
             '-':330
             }

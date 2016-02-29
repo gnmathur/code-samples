@@ -75,6 +75,10 @@ def infix_stack_test():
         __test(IE, expr, 567)
         expr = "5 * ( 6 + 2 ) - 12 / 4"
         __test(IE, expr, 37)
+        expr = "( ( ( 10 + 12 ) * 3 ) / 10 )"
+        __test(IE, expr, 6.6)
+        expr = "100 / 25 * 5 + 3 - 1"
+        __test(IE, expr, 22)
 
     except AssertionError as e:
         print e
